@@ -1,4 +1,4 @@
-import { clerkClient } from('@clerk/clerk-sdk-node');
+import { clerkClient } from '@clerk/clerk-sdk-node';
 
 const authAdmin = async (userid) => {
     try {
