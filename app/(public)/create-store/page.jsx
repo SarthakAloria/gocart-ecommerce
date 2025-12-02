@@ -47,12 +47,12 @@ export default function CreateStore() {
         try {
             const token = await getToken()
             const formData = new FormData()
-            formData.append("name", "storeInfo.name")
-            formData.append("description", "storeInfo.description")
-            formData.append("username", "storeInfo.username")
-            formData.append("email", "storeInfo.email")
-            formData.append("contact", "storeInfo.contact")
-            formData.append("address", "storeInfo.address")
+            formData.append("name", storeInfo.name)
+            formData.append("description", storeInfo.description)
+            formData.append("username", storeInfo.username)
+            formData.append("email", storeInfo.email)
+            formData.append("contact", storeInfo.contact)
+            formData.append("address", storeInfo.address)
             formData.append("image", storeInfo.image)
 
             const {data} = await axios.post('/api/store/create', formData, {headers: {Authorization: `Bearer ${token}`}})
