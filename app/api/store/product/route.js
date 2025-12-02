@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import authSeller from "@/middlewares/authSeller";
-import { getAuth } from "@clerk/nextjs/dist/types/server";
+import { getAuth } from "@clerk/nextjs/server";
 import ImageKit from "@imagekit/nodejs";
 import { err } from "inngest/types";
 import { NextResponse } from "next/server";
@@ -77,7 +77,7 @@ export async function GET(request) {
 
         const products = await prisma.product.findMany({ where: { storeId: storeId }, })
         return NextResponse.json(products)
-        
+
     } catch (error) {
         console.error(error)
         return NextResponse.json({ error: error.code || error.message }, { status: 400 })

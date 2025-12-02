@@ -1,7 +1,6 @@
 import prisma from '@/lib/prisma';
 import { getAuth } from '@clerk/nextjs/server';
 import ImageKit from '@imagekit/nodejs';
-import { transform } from 'next/dist/build/swc/generated-native';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Create the store
