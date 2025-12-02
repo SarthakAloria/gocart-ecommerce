@@ -1,12 +1,15 @@
 'use client'
 import { dummyStoreDashboardData } from "@/assets/assets"
 import Loading from "@/components/Loading"
+import OrderAreaChart from "@/components/charts/OrderAreaChart"
+import {useAuth} from "@clerk/nextjs"
+import { set } from "date-fns"
 import { CircleDollarSignIcon, ShoppingBasketIcon, StarIcon, TagsIcon } from "lucide-react"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 
 export default function Dashboard() {
+    const { gettoken } = useAuth()
 
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
 
@@ -28,8 +31,15 @@ export default function Dashboard() {
     ]
 
     const fetchDashboardData = async () => {
-        setDashboardData(dummyStoreDashboardData)
-        setLoading(false)
+       try {
+        const token = await gettoken()
+        const {data} = await axios.get('/api/seller/dashboard', {headers: {Authorization: `Bearer ${token}`}})
+        setDashboardData(data.dashboardData)
+    
+       } catch (error) {
+        toast.error(error?.response?.data?.error || error.message)
+       }
+       setLoading(false)
     }
 
     useEffect(() => {
@@ -40,7 +50,7 @@ export default function Dashboard() {
 
     return (
         <div className=" text-slate-500 mb-28">
-            <h1 className="text-2xl">Seller <span className="text-slate-800 font-medium">Dashboard</span></h1>
+            <h1 className="text-2xl">Admin <span className="text-slate-800 font-medium">Dashboard</span></h1>
 
             <div className="flex flex-wrap gap-5 my-10 mt-4">
                 {
