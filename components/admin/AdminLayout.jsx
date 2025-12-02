@@ -1,12 +1,12 @@
 'use client'
-import { useEffect, useState } from "react";
-import Loading from "../Loading";
-import Link from "next/link";
-import { ArrowRightIcon } from "lucide-react";
-import AdminNavbar from "./AdminNavbar";
-import AdminSidebar from "./AdminSidebar";
-import { useUser, useAuth } from "@clerk/nextjs";
-import axios from "axios";
+import { useEffect, useState } from "react"
+import Loading from "../Loading"
+import Link from "next/link"
+import { ArrowRightIcon } from "lucide-react"
+import AdminNavbar from "./AdminNavbar"
+import AdminSidebar from "./AdminSidebar"
+import { useUser,useAuth } from "@clerk/nextjs"
+//import { headers } from "next/headers"
 
 const AdminLayout = ({ children }) => {
 
@@ -30,9 +30,9 @@ const AdminLayout = ({ children }) => {
 
     useEffect(() => {
         if(user){
-        fetchIsAdmin()
+      fetchIsAdmin()
         }
-
+        
     }, [user])
 
     return loading ? (
