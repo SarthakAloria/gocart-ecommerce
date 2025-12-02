@@ -6,6 +6,8 @@ import ImageKit from "@imagekit/nodejs";
 import { err } from "inngest/types";
 import { NextResponse } from "next/server";
 
+import imagekit from "@/configs/imageKit";
+
 // Add new product
 export async function POST(request) {
     try {
@@ -31,7 +33,7 @@ export async function POST(request) {
         // upload images to imagekit
         const imageUrls = await Promise.all(images.map(async (image) => {
             const buffer = Buffer.from(await image.arrayBuffer())
-            const response = await ImageKit.upload({
+            const response = await imagekit.upload({
                 file: buffer,
                 fileName: image.name,
                 folder: "products",
