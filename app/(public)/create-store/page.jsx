@@ -53,7 +53,7 @@ export default function CreateStore() {
             formData.append("email", "storeInfo.email")
             formData.append("contact", "storeInfo.contact")
             formData.append("address", "storeInfo.address")
-            formData.append("image", "storeInfo.image")
+            formData.append("image", storeInfo.image)
 
             const {data} = await axios.post('/api/store/create', formData, {headers: {Authorization: `Bearer ${token}`}})
             toast.success(data.message)
