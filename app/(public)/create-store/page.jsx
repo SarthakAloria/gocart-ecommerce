@@ -4,9 +4,14 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import toast from "react-hot-toast"
 import Loading from "@/components/Loading"
+import { useAuth, useUser } from "@clerk/nextjs"
+import { useRouter } from "next/navigation"
 
 export default function CreateStore() {
 
+    const {user} = useUser()
+    const router = useRouter()
+    const {getToken} = useAuth()
     const [alreadySubmitted, setAlreadySubmitted] = useState(false)
     const [status, setStatus] = useState("")
     const [loading, setLoading] = useState(true)
@@ -35,9 +40,17 @@ export default function CreateStore() {
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
-        // Logic to submit the store details
-
-
+        if(!user){
+            return toast('please login to continue')
+        }
+        try {
+            const token = await getToken()
+            const formData = new FormData()
+            formData.append("name", "storeInfo.name")
+            formData.append("description", "storeInfo.description")
+        } catch (error) {
+            
+        }
     }
 
     useEffect(() => {
