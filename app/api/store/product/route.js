@@ -6,6 +6,8 @@ import ImageKit from "@imagekit/nodejs";
 import { err } from "inngest/types";
 import { NextResponse } from "next/server";
 
+import imagekit from "@/configs/imageKit";
+
 // Add new product
 export async function POST(request) {
     try {
