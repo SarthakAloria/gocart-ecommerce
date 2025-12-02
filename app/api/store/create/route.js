@@ -1,7 +1,6 @@
 import imagekit from '@/configs/imageKit';
 import prisma from '@/lib/prisma';
 import { getAuth } from '@clerk/nextjs/server';
-import ImageKit from '@imagekit/nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Create the store
@@ -52,7 +51,7 @@ export async function POST(request) {
         })
 
         const optimizedImage = imagekit.url({
-            Path: response.filePath,
+            path: response.filePath,
             transformation: [
                 { quality: "auto" },
                 { format: "webp" },
@@ -83,7 +82,7 @@ export async function POST(request) {
 
     } catch (error) {
         console.error(error)
-        return NextResponse.json({ error: error.code || error.message }, { status: 400 })
+        return NextResponse.json({ error: error.code || error.message }, { status: 500 })
     }
 }
 
@@ -108,6 +107,6 @@ export async function GET(request) {
         return NextResponse.json({ status: "not registered" })
     } catch (error) {
         console.error(error)
-        return NextResponse.json({ error: error.code || error.message }, { status: 400 })
+        return NextResponse.json({ error: error.code || error.message }, { status: 500 })
     }
 }
